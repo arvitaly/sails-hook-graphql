@@ -14,7 +14,7 @@ export = (sails: Sails.App) => {
         controller: null,
         initialize: function (cb) {
             sails.on("hook:orm:loaded", () => {
-                this.controller = Controller(generate(sails));
+                this.controller = Controller({ schema: generate(sails) });
                 cb();
             });
         },

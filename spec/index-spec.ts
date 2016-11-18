@@ -31,8 +31,8 @@ describe("Hook spec", () => {
                 return schema;
             }
         });
-        controllerSpy.and.callFake((schema2) => {
-            if (schema2 === schema) {
+        controllerSpy.and.callFake((opts) => {
+            if (opts.schema === schema) {
                 return controllerHandler;
             }
         });

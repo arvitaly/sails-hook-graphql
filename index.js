@@ -14,7 +14,7 @@ module.exports = (sails) => {
         controller: null,
         initialize: function (cb) {
             sails.on("hook:orm:loaded", () => {
-                this.controller = sails_graphql_adapter_1.controller(sails_graphql_adapter_1.generate(sails));
+                this.controller = sails_graphql_adapter_1.controller({ schema: sails_graphql_adapter_1.generate(sails) });
                 cb();
             });
         },
