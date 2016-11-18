@@ -1,0 +1,38 @@
+{
+  "name": "sails-hook-graphql",
+  "version": "0.0.1",
+  "description": "Hook for Sails, which add graphql interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsc && tslint --project=tsconfig.json && istanbul cover node_modules/jasmine/bin/jasmine.js",
+    "watch:test": "nodemon --exec jasmine"
+  },
+  "sails": {
+    "isHook": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arvitaly/sails-hook-graphql.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arvitaly/sails-hook-graphql/issues"
+  },
+  "homepage": "https://github.com/arvitaly/sails-hook-graphql#readme",
+  "devDependencies": {
+    "@types/jasmine": "^2.5.38",
+    "coveralls": "^2.11.15",
+    "istanbul": "^0.4.5",
+    "jasmine": "^2.4.1",
+    "mock2": "0.0.17",
+    "tslint": "^3.15.1",
+    "typescript": "^2.0.10"
+  },
+  "dependencies": {
+    "sails-graphql-adapter": "^0.1.0",
+    "sails-typings": "^0.0.5",
+    "waterline-typings": "0.0.2"
+  }
+}
