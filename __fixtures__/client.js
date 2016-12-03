@@ -20,7 +20,7 @@ process.on("message", (q) => {
             return;
         }
         process.send({
-            data: JSON.parse(JSON.stringify(data.data)),
+            data: JSON.parse(data).data,
             type: "resolve",
         });
     });

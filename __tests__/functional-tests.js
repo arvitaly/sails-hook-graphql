@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const child_process_1 = require("child_process");
 const sails_fixture_app_1 = require("sails-fixture-app");
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000000;
 describe("functional tests", () => {
     let app;
     let client;
@@ -17,23 +16,27 @@ describe("functional tests", () => {
         app = yield sails_fixture_app_1.lift({ path: __dirname + "/../__fixtures__/app1", port: 14001 });
         client = new Client("http://127.0.0.1:14001");
     }));
-    afterEach(() => __awaiter(this, void 0, void 0, function* () {
-        yield sails_fixture_app_1.lower(app);
-    }));
     it("query one", () => __awaiter(this, void 0, void 0, function* () {
         const created = yield sails_fixture_app_1.createModel1(app);
         console.log("created", created);
+        //let created = { id: 1 };
         const result = yield client.query(`query Q1{
-            model1(id:${created.id}){
-                title
+            viewer{
+                modelName1(id:${created.id}){
+                    title
+                }
             }
         }`);
-        expect(result).toEqual({ title: created.title });
+        expect(result).toEqual({ viewer: { modelName1: { title: created.title } } });
+    }));
+    afterEach(() => __awaiter(this, void 0, void 0, function* () {
+        client.close();
+        yield sails_fixture_app_1.lower(app);
     }));
 });
 class Client {
     constructor(url) {
-        this.child = child_process_1.fork("./client", [url]);
+        this.child = child_process_1.fork("./__fixtures__/client", [url]);
         this.child.on("message", (data) => {
             switch (data.type) {
                 case "reject":
@@ -49,5 +52,8 @@ class Client {
             this.reject = reject;
             this.child.send(q);
         });
+    }
+    close() {
+        this.child.kill();
     }
 }

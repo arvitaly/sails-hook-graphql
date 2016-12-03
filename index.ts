@@ -2,7 +2,7 @@
 import { IConfig } from "./config";
 import Sails = require("sails");
 import { graphql, introspectionQuery } from "graphql";
-import { controller as Controller, generate } from "sails-graphql-adapter";
+import { Callbacks, Controller, createModels, getGraphQLSchema, Resolver } from "sails-graphql-adapter";
 export = (sails: Sails.App) => {
     return {
         configKey: "graphql",
@@ -20,24 +20,26 @@ export = (sails: Sails.App) => {
             }
             sails.config.routes["POST " + url] = {
                 fn: (req, res) => {
-                    res.send({ data: "ok" });
-                    //return this.controller.index(req, res);
+                    return this.controller.index(req, res);
                 },
 
             };
         },
         controller: null,
         initialize: function (cb) {
-            /*sails.on("hook:orm:loaded", () => {
-                const schema = generate(sails);
+            const callbacks = new Callbacks(sails);
+            sails.on("hook:orm:loaded", () => {
+                const models = createModels(sails);
+                const resolver = new Resolver(models, sails, callbacks);
+                const schema = getGraphQLSchema(models, resolver);
                 this.controller = Controller({ schema: schema });
-                graphql(schema, introspectionQuery).then(jsonSchema => {
+                /*graphql(schema, introspectionQuery).then((jsonSchema) => {
                     this.jsonSchema = jsonSchema;
                     cb();
                 }).catch((err) => {
                     throw err;
-                });
-            });*/
+                });*/
+            });
             cb();
         },
         jsonSchema: null,

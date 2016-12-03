@@ -1,4 +1,5 @@
 "use strict";
+const sails_graphql_adapter_1 = require("sails-graphql-adapter");
 module.exports = (sails) => {
     return {
         configKey: "graphql",
@@ -16,23 +17,25 @@ module.exports = (sails) => {
             }
             sails.config.routes["POST " + url] = {
                 fn: (req, res) => {
-                    res.send({ data: "ok" });
-                    //return this.controller.index(req, res);
+                    return this.controller.index(req, res);
                 },
             };
         },
         controller: null,
         initialize: function (cb) {
-            /*sails.on("hook:orm:loaded", () => {
-                const schema = generate(sails);
-                this.controller = Controller({ schema: schema });
-                graphql(schema, introspectionQuery).then(jsonSchema => {
+            const callbacks = new sails_graphql_adapter_1.Callbacks(sails);
+            sails.on("hook:orm:loaded", () => {
+                const models = sails_graphql_adapter_1.createModels(sails);
+                const resolver = new sails_graphql_adapter_1.Resolver(models, sails, callbacks);
+                const schema = sails_graphql_adapter_1.getGraphQLSchema(models, resolver);
+                this.controller = sails_graphql_adapter_1.Controller({ schema: schema });
+                /*graphql(schema, introspectionQuery).then((jsonSchema) => {
                     this.jsonSchema = jsonSchema;
                     cb();
                 }).catch((err) => {
                     throw err;
-                });
-            });*/
+                });*/
+            });
             cb();
         },
         jsonSchema: null,
