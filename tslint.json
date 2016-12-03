@@ -1,6 +1,5 @@
 {
-    "extends": "tslint:latest",
-    "rules": {
-        "forin": false
-    }
+    "extends": [
+        "tslint:latest"
+    ]
 }
