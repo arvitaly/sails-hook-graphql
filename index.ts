@@ -2,9 +2,10 @@
 import { IConfig } from "./config";
 import Sails = require("sails");
 import { graphql, introspectionQuery } from "graphql";
-import { Callbacks, Controller, createModels, getGraphQLSchema, Resolver } from "sails-graphql-adapter";
+import { Callbacks, Controller, getGraphQLSchema } from "sails-graphql-adapter";
 export = (sails: Sails.App) => {
     return {
+        callbacks: null,
         configKey: "graphql",
         configure: function () {
             const config: IConfig = sails.config[this.configKey] || {};
@@ -22,16 +23,14 @@ export = (sails: Sails.App) => {
                 fn: (req, res) => {
                     return this.controller.index(req, res);
                 },
-
             };
+
         },
         controller: null,
         initialize: function (cb) {
-            const callbacks = new Callbacks(sails);
+            this.callbacks = new Callbacks(sails);
             sails.on("hook:orm:loaded", () => {
-                const models = createModels(sails);
-                const resolver = new Resolver(models, sails, callbacks);
-                const schema = getGraphQLSchema(models, resolver);
+                const schema = getGraphQLSchema(sails, this.callbacks);
                 this.controller = Controller({ schema: schema });
                 /*graphql(schema, introspectionQuery).then((jsonSchema) => {
                     this.jsonSchema = jsonSchema;

@@ -2,6 +2,7 @@
 const sails_graphql_adapter_1 = require("sails-graphql-adapter");
 module.exports = (sails) => {
     return {
+        callbacks: null,
         configKey: "graphql",
         configure: function () {
             const config = sails.config[this.configKey] || {};
@@ -23,11 +24,9 @@ module.exports = (sails) => {
         },
         controller: null,
         initialize: function (cb) {
-            const callbacks = new sails_graphql_adapter_1.Callbacks(sails);
+            this.callbacks = new sails_graphql_adapter_1.Callbacks(sails);
             sails.on("hook:orm:loaded", () => {
-                const models = sails_graphql_adapter_1.createModels(sails);
-                const resolver = new sails_graphql_adapter_1.Resolver(models, sails, callbacks);
-                const schema = sails_graphql_adapter_1.getGraphQLSchema(models, resolver);
+                const schema = sails_graphql_adapter_1.getGraphQLSchema(sails, this.callbacks);
                 this.controller = sails_graphql_adapter_1.Controller({ schema: schema });
                 /*graphql(schema, introspectionQuery).then((jsonSchema) => {
                     this.jsonSchema = jsonSchema;
