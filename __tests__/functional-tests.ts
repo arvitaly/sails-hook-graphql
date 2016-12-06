@@ -32,6 +32,7 @@ describe("functional tests", () => {
                 }
             }
         }`, (data) => {
+                delete data.data.updatedAt;
                 expect(data).toMatchSnapshot();
                 done();
             });
@@ -71,6 +72,7 @@ describe("functional tests", () => {
                 }
             }
         }`, (data) => {
+                delete data.data.updatedAt;
                 expect(data).toMatchSnapshot();
                 done();
             });
