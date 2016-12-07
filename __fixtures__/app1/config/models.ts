@@ -1,0 +1,3 @@
+export = {
+    autoPK: true,
+};

@@ -7,7 +7,7 @@ export = (sails: Sails.App) => {
     return {
         callbacks: null,
         configKey: "graphql",
-        configure: function () {
+        configure: function() {
             const config: IConfig = sails.config[this.configKey] || {};
             let url: string = config.url || "/graphql";
             config.isJSONSchema = typeof (config.isJSONSchema) === "undefined" ? true : config.isJSONSchema;
@@ -19,7 +19,7 @@ export = (sails: Sails.App) => {
                     },
                 };
             }
-            sails.config.routes["POST " + url] = {
+            sails.config.routes[url] = {
                 fn: (req, res) => {
                     return this.controller.index(req, res);
                 },
@@ -27,7 +27,7 @@ export = (sails: Sails.App) => {
 
         },
         controller: null,
-        initialize: function (cb) {
+        initialize: function(cb) {
             this.callbacks = new Callbacks(sails);
             sails.on("hook:orm:loaded", () => {
                 const schema = getGraphQLSchema(sails, this.callbacks);

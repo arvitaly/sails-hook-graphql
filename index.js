@@ -16,7 +16,7 @@ module.exports = (sails) => {
                     },
                 };
             }
-            sails.config.routes["POST " + url] = {
+            sails.config.routes[url] = {
                 fn: (req, res) => {
                     return this.controller.index(req, res);
                 },

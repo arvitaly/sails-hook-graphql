@@ -84,6 +84,48 @@ describe("functional tests", () => {
         });
         yield app.models[sails_fixture_app_1.model1Id].update({ id: created.id }, { name: "test" });
     }));
+    it("mutation create", () => __awaiter(this, void 0, void 0, function* () {
+        const newName1 = "newName1";
+        const num1 = 1122;
+        const dt1 = "Wed, 10 Nov 2010 17:00:00 GMT";
+        const result = yield client.query(`mutation M1{            
+            createModelName1(input:{
+                name:"${newName1}", 
+                num:${num1}, 
+                isActive:false,
+                firstActive:"${dt1}",
+                createModel2Field:{
+                    name: "name12",
+                    key: "key13"
+                }
+            }){
+                modelName1{
+                    name
+                    num
+                    isActive
+                    firstActive
+                    model2Field{
+                        key
+                        name
+                    }                    
+                }                
+            }            
+        }`);
+        expect(result).toEqual({
+            createModelName1: {
+                modelName1: {
+                    name: newName1,
+                    num: num1,
+                    isActive: false,
+                    firstActive: dt1,
+                    model2Field: {
+                        key: "key13",
+                        name: "name12",
+                    },
+                },
+            },
+        });
+    }));
     afterEach(() => __awaiter(this, void 0, void 0, function* () {
         client.close();
         yield sails_fixture_app_1.lower(app);
