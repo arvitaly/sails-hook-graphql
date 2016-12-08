@@ -44,11 +44,12 @@ function query(query, subscriptionId) {
                 reject("Invalis status: " + jwres.statusCode + ", body: " + JSON.stringify(jwres));
                 return;
             }
-            if (data.errors) {
-                reject("GraphQL errors: " + JSON.stringify(data.errors));
+            let realData: ExecutionResult = JSON.parse(data as any);
+            if (realData.errors) {
+                reject("GraphQL errors: " + JSON.stringify(realData.errors));
                 return;
             }
-            resolve(JSON.parse(data as any).data);
+            resolve(realData.data);
         });
     });
 }
