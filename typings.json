@@ -1,7 +1,5 @@
 {
-  "globalDependencies": {
-    "graphql-relay": "github:arvitaly/typed-graphql-relay/graphql-relay.d.ts",
-    "sails-typings": "npm:sails-typings/index.d.ts",
-    "waterline-typings": "npm:waterline-typings/index.d.ts"
+  "dependencies": {
+    "sails": "npm:sails-typings"
   }
 }

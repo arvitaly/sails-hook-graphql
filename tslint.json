@@ -1,6 +1,9 @@
 {
-    "extends": "tslint:latest",
+    "extends": [
+        "tslint:latest"
+    ],
     "rules": {
-        "forin": false
+        "object-literal-sort-keys": false,
+        "arrow-parens": false
     }
 }

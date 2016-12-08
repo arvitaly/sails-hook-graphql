@@ -1,0 +1,55 @@
+exports[`functional tests query connection 1`] = `
+Object {
+  "viewer": Object {
+    "modelName1s": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "name": "na3",
+          },
+        },
+        Object {
+          "node": Object {
+            "name": "na4",
+          },
+        },
+        Object {
+          "node": Object {
+            "name": "na5",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`functional tests query connection with subscription 1`] = `
+Object {
+  "data": Object {
+    "createdAt": "2016-11-18T11:25:11.000Z",
+    "firstActive": "2016-11-18T11:25:11.000Z",
+    "id": 6,
+    "isActive": false,
+    "name": "test",
+    "num": 15,
+  },
+  "modelId": "modelname1",
+  "type": "add",
+}
+`;
+
+exports[`functional tests query one with subscribe 1`] = `
+Object {
+  "data": Object {
+    "createdAt": "2016-11-18T11:25:11.000Z",
+    "firstActive": "2016-11-18T11:25:11.000Z",
+    "id": 2,
+    "isActive": false,
+    "name": "test",
+    "num": 15,
+  },
+  "modelId": "modelname1",
+  "type": "update",
+}
+`;
