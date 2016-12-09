@@ -14,7 +14,7 @@ describe("functional tests", () => {
         client.close();
         app.kill();
     });
-    fit("query one", async () => {
+    it("query one", async () => {
         const created = await app.command("create", { modelId: "modelname1", created: createModel1() });
         const result = await client.query(`query Q1{
             viewer{
@@ -30,7 +30,7 @@ describe("functional tests", () => {
         }`);
         expect(result).toEqual({ viewer: { modelName1: { name: created.name, model2Field: null } } });
     });
-    fit("query one with subscribe", async (done) => {
+    it("query one with subscribe", async (done) => {
         const created = await app.command("create", { modelId: "modelname1", created: createModel1() });
         const result = await client.subscription(`query Q1{
             viewer{
@@ -46,7 +46,7 @@ describe("functional tests", () => {
         expect(result).toEqual({ viewer: { modelName1: { name: created.name } } });
         await app.command("update", { modelId: "modelname1", where: { id: created.id }, updated: { name: "test" } });
     });
-    fit("query connection", async () => {
+    it("query connection", async () => {
         await app.command("create", { modelId: "modelname1", created: createModel1() });
         await app.command("create", { modelId: "modelname1", created: createModel1() });
         const created = await app.command("create", { modelId: "modelname1", created: createModel1() });
@@ -64,7 +64,7 @@ describe("functional tests", () => {
         }`);
         expect(result).toMatchSnapshot();
     });
-    fit("query connection with subscription", async (done) => {
+    it("query connection with subscription", async (done) => {
         const created = await app.command("create", { modelId: "modelname1", created: createModel1() });
         const result = await client.subscription(`query Q1{
             viewer{
@@ -84,7 +84,7 @@ describe("functional tests", () => {
             });
         await app.command("update", { modelId: "modelname1", where: { id: created.id }, updated: { name: "test" } });
     });
-    fit("mutation create", async () => {
+    it("mutation create", async () => {
         const newName1 = "newName1";
         const num1 = 1122;
         const dt1 = "Wed, 10 Nov 2010 17:00:00 GMT";
@@ -151,7 +151,7 @@ describe("functional tests", () => {
             },
         });
     });
-    fit("mutation update", async () => {
+    it("mutation update", async () => {
         const created = await app.command("create", { modelId: "modelname1", created: createModel1() });
         const newName1 = "n1";
         const dt1 = "Sun, 10 Nov 2013 17:00:00 GMT";

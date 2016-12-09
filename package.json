@@ -31,7 +31,7 @@
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "jest": "^17.0.3",
-    "sails-fixture-app": "^0.0.8",
+    "sails-fixture-app": "^0.0.10",
     "sails.io.js": "^1.1.0",
     "socket.io-client": "^1.7.1",
     "tslint": "^4.0.2",
@@ -42,7 +42,8 @@
     "unmockedModulePathPatterns": []
   },
   "dependencies": {
-    "sails-graphql-adapter": "^0.2.3",
-    "sails-typings": "^0.2.3"
+    "sails-graphql-adapter": "^0.2.8",
+    "sails-typings": "^0.2.3",
+    "sails.io.js": "^1.1.4"
   }
 }
