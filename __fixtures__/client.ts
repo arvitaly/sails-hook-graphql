@@ -41,7 +41,8 @@ function query(query, subscriptionId) {
     return new Promise((resolve, reject) => {
         io.socket.post("/graphql", { query, subscriptionId }, (data: ExecutionResult, jwres) => {
             if (jwres.statusCode !== 200) {
-                reject("Invalis status: " + jwres.statusCode + ", body: " + JSON.stringify(jwres));
+                reject("Invalis status: " + jwres.statusCode + ", body: " + JSON.stringify("" + jwres.body) +
+                    ", error " + + JSON.stringify("" + jwres.error));
                 return;
             }
             let realData: ExecutionResult = JSON.parse(data as any);
