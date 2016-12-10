@@ -1,2 +1,2 @@
-import model = require("sails-fixture-app/api/models/model2");
+import model = require("sails-fixture-app/api/models/Model2");
 export = model;
