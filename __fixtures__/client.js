@@ -2,7 +2,7 @@
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
         function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
@@ -16,7 +16,7 @@ process.on("message", (message) => __awaiter(this, void 0, void 0, function* () 
     switch (message.type) {
         case "subscription":
             subscriptionId = (+new Date()) + "" + parseInt("" + Math.random(), 0);
-            io.socket.on("subscription-" + subscriptionId, (m) => {
+            io.socket.on("live", (m) => {
                 process.send({
                     data: m,
                     id: message.id,

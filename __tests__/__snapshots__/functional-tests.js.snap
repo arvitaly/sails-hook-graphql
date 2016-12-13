@@ -34,8 +34,8 @@ Object {
     "name": "test",
     "num": 15,
   },
-  "modelId": "modelname1",
-  "type": "add",
+  "globalId": "TW9kZWxOYW1lMTo2",
+  "kind": "add",
 }
 `;
 
@@ -49,7 +49,7 @@ Object {
     "name": "test",
     "num": 15,
   },
-  "modelId": "modelname1",
-  "type": "update",
+  "globalId": "TW9kZWxOYW1lMToy",
+  "kind": "update",
 }
 `;

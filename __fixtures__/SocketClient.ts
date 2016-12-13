@@ -4,6 +4,7 @@ import SocketIO = require("socket.io-client");
 export default class Client extends EventEmitter {
     protected child: ChildProcess;
     protected queries: { [index: string]: { resolve: any, reject: any, subscription: any } } = {};
+    protected id = 0;
     constructor(url: string) {
         super();
         this.child = fork("./__fixtures__/client", [url]);
@@ -29,7 +30,7 @@ export default class Client extends EventEmitter {
         return this.query(q, "subscription", cb);
     }
     public query(query: string, type = "query", cb = null) {
-        const id = (+new Date()) + "" + parseInt("" + Math.random(), 0);
+        const id = this.id++;
         this.queries[id] = { resolve: null, reject: null, subscription: cb };
         return new Promise((resolve, reject) => {
             this.queries[id].resolve = resolve;

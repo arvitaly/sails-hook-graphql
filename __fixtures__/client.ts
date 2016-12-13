@@ -1,19 +1,15 @@
 import { ExecutionResult } from "graphql";
+import { LiveMessage } from "sails-graphql-interfaces";
 import SailsIOJS = require("sails.io.js");
 import SocketIO = require("socket.io-client");
 const io = SailsIOJS(SocketIO);
 io.sails.url = process.argv[2];
-type Message = {
-    type: "update" | "add" | "remove";
-    modelId;
-    data: any;
-};
 process.on("message", async (message) => {
     let subscriptionId = null;
     switch (message.type) {
         case "subscription":
             subscriptionId = (+new Date()) + "" + parseInt("" + Math.random(), 0);
-            io.socket.on("subscription-" + subscriptionId, (m: Message) => {
+            io.socket.on("live", (m: LiveMessage) => {
                 process.send({
                     data: m,
                     id: message.id,

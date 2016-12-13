@@ -2,20 +2,19 @@
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
         function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
 const graphql_relay_1 = require("graphql-relay");
 const sails_fixture_app_1 = require("sails-fixture-app");
-const sails_1 = require("./../__fixtures__/sails");
 const SocketClient_1 = require("./../__fixtures__/SocketClient");
 describe("functional tests", () => {
     let app;
     let client;
     beforeEach(() => __awaiter(this, void 0, void 0, function* () {
-        app = yield sails_1.default();
+        app = yield sails_fixture_app_1.lift();
         client = new SocketClient_1.default("http://127.0.0.1:14001");
     }));
     afterEach(() => __awaiter(this, void 0, void 0, function* () {
@@ -23,7 +22,7 @@ describe("functional tests", () => {
         app.kill();
     }));
     it("query one", () => __awaiter(this, void 0, void 0, function* () {
-        const created = yield app.command("create", { modelId: "modelname1", created: sails_fixture_app_1.createModel1() });
+        const created = yield app.create("modelname1", sails_fixture_app_1.createModel1());
         const result = yield client.query(`query Q1{
             viewer{
                 modelName1(id:"${graphql_relay_1.toGlobalId("ModelName1", created.id)}"){
@@ -39,7 +38,7 @@ describe("functional tests", () => {
         expect(result).toEqual({ viewer: { modelName1: { name: created.name, model2Field: null } } });
     }));
     it("query one with subscribe", (done) => __awaiter(this, void 0, void 0, function* () {
-        const created = yield app.command("create", { modelId: "modelname1", created: sails_fixture_app_1.createModel1() });
+        const created = yield app.create(sails_fixture_app_1.model1Id, sails_fixture_app_1.createModel1());
         const result = yield client.subscription(`query Q1{
             viewer{
                 modelName1(id:"${graphql_relay_1.toGlobalId("ModelName1", created.id)}"){
@@ -48,16 +47,17 @@ describe("functional tests", () => {
             }
         }`, (data) => {
             delete data.data.updatedAt;
+            delete data.id;
             expect(data).toMatchSnapshot();
             done();
         });
         expect(result).toEqual({ viewer: { modelName1: { name: created.name } } });
-        yield app.command("update", { modelId: "modelname1", where: { id: created.id }, updated: { name: "test" } });
+        yield app.update(sails_fixture_app_1.model1Id, created.id, { name: "test" });
     }));
     it("query connection", () => __awaiter(this, void 0, void 0, function* () {
-        yield app.command("create", { modelId: "modelname1", created: sails_fixture_app_1.createModel1() });
-        yield app.command("create", { modelId: "modelname1", created: sails_fixture_app_1.createModel1() });
-        const created = yield app.command("create", { modelId: "modelname1", created: sails_fixture_app_1.createModel1() });
+        yield app.create(sails_fixture_app_1.model1Id, sails_fixture_app_1.createModel1());
+        yield app.create(sails_fixture_app_1.model1Id, sails_fixture_app_1.createModel1());
+        const created = yield app.create(sails_fixture_app_1.model1Id, sails_fixture_app_1.createModel1());
         const result = yield client.query(`query Q1{
             viewer{
                 modelName1s{
@@ -73,7 +73,7 @@ describe("functional tests", () => {
         expect(result).toMatchSnapshot();
     }));
     it("query connection with subscription", (done) => __awaiter(this, void 0, void 0, function* () {
-        const created = yield app.command("create", { modelId: "modelname1", created: sails_fixture_app_1.createModel1() });
+        const created = yield app.create(sails_fixture_app_1.model1Id, sails_fixture_app_1.createModel1());
         const result = yield client.subscription(`query Q1{
             viewer{
                 modelName1s(where:{nameContains:"test"}){
@@ -87,10 +87,11 @@ describe("functional tests", () => {
             }
         }`, (data) => {
             delete data.data.updatedAt;
+            delete data.id;
             expect(data).toMatchSnapshot();
             done();
         });
-        yield app.command("update", { modelId: "modelname1", where: { id: created.id }, updated: { name: "test" } });
+        yield app.update(sails_fixture_app_1.model1Id, created.id, { name: "test" });
     }));
     it("mutation create", () => __awaiter(this, void 0, void 0, function* () {
         const newName1 = "newName1";
@@ -160,7 +161,7 @@ describe("functional tests", () => {
         });
     }));
     it("mutation update", () => __awaiter(this, void 0, void 0, function* () {
-        const created = yield app.command("create", { modelId: "modelname1", created: sails_fixture_app_1.createModel1() });
+        const created = yield app.create(sails_fixture_app_1.model1Id, sails_fixture_app_1.createModel1());
         const newName1 = "n1";
         const dt1 = "Sun, 10 Nov 2013 17:00:00 GMT";
         const globalId = graphql_relay_1.toGlobalId("ModelName1", created.id);
