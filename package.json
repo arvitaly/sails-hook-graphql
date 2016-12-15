@@ -4,7 +4,7 @@
   "description": "Hook for Sails, which add graphql interface",
   "main": "index.js",
   "scripts": {
-    "test": "tsc && tslint --project=tsconfig.json && jest --verbose",
+    "test": "tsc && tslint --project=tsconfig.json && jest --verbose --coverage",
     "watch:test": "jest --watch"
   },
   "sails": {
