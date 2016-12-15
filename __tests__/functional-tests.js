@@ -14,7 +14,11 @@ describe("functional tests", () => {
     let app;
     let client;
     beforeEach(() => __awaiter(this, void 0, void 0, function* () {
-        app = yield sails_fixture_app_1.lift();
+        app = yield sails_fixture_app_1.lift({
+            modules: {
+                "sails-hook-graphql": require.resolve("./../"),
+            },
+        });
         client = new SocketClient_1.default("http://127.0.0.1:14001");
     }));
     afterEach(() => __awaiter(this, void 0, void 0, function* () {

@@ -6,7 +6,11 @@ describe("functional tests", () => {
     let app: RemoteApp;
     let client: Client;
     beforeEach(async () => {
-        app = await lift();
+        app = await lift({
+            modules: {
+                "sails-hook-graphql": require.resolve("./../"),
+            },
+        });
         client = new Client("http://127.0.0.1:14001");
     });
     afterEach(async () => {

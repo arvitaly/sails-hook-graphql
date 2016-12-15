@@ -1,4 +1,5 @@
 "use strict";
+const graphql_1 = require("graphql");
 const sails_graphql_adapter_1 = require("sails-graphql-adapter");
 module.exports = (sails) => {
     return {
@@ -28,14 +29,13 @@ module.exports = (sails) => {
             sails.on("hook:orm:loaded", () => {
                 const schema = sails_graphql_adapter_1.getGraphQLSchema(sails, this.callbacks);
                 this.controller = sails_graphql_adapter_1.Controller({ schema: schema });
-                /*graphql(schema, introspectionQuery).then((jsonSchema) => {
+                graphql_1.graphql(schema, graphql_1.introspectionQuery).then((jsonSchema) => {
                     this.jsonSchema = jsonSchema;
                     cb();
                 }).catch((err) => {
                     throw err;
-                });*/
+                });
             });
-            cb();
         },
         jsonSchema: null,
     };
