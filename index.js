@@ -17,6 +17,11 @@ module.exports = (sails) => {
                     },
                 };
             }
+            sails.config.routes[url + "-unsubscribe"] = {
+                fn: (req, res) => {
+                    return this.controller.unsubscribe(req, res);
+                },
+            };
             sails.config.routes[url] = {
                 fn: (req, res) => {
                     return this.controller.index(req, res);
@@ -27,9 +32,9 @@ module.exports = (sails) => {
         initialize: function (cb) {
             this.callbacks = new sails_graphql_adapter_1.Callbacks(sails);
             sails.on("hook:orm:loaded", () => {
-                const schema = sails_graphql_adapter_1.getGraphQLSchema(sails, this.callbacks);
-                this.controller = sails_graphql_adapter_1.Controller({ schema: schema });
-                graphql_1.graphql(schema, graphql_1.introspectionQuery).then((jsonSchema) => {
+                const info = sails_graphql_adapter_1.default(sails, this.callbacks);
+                this.controller = sails_graphql_adapter_1.Controller({ schema: info.schema, resolver: info.resolver });
+                graphql_1.graphql(info.schema, graphql_1.introspectionQuery).then((jsonSchema) => {
                     this.jsonSchema = jsonSchema;
                     cb();
                 }).catch((err) => {

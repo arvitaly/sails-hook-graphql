@@ -2,7 +2,7 @@
 import { IConfig } from "./config";
 import Sails = require("sails");
 import { graphql, introspectionQuery } from "graphql";
-import { Callbacks, Controller, getGraphQLSchema } from "sails-graphql-adapter";
+import getGraphQLSchemaAndResolver, { Callbacks, Controller } from "sails-graphql-adapter";
 export = (sails: Sails.App) => {
     return {
         callbacks: null,
@@ -19,6 +19,11 @@ export = (sails: Sails.App) => {
                     },
                 };
             }
+            sails.config.routes[url + "-unsubscribe"] = {
+                fn: (req, res) => {
+                    return this.controller.unsubscribe(req, res);
+                },
+            };
             sails.config.routes[url] = {
                 fn: (req, res) => {
                     return this.controller.index(req, res);
@@ -30,9 +35,9 @@ export = (sails: Sails.App) => {
         initialize: function (cb) {
             this.callbacks = new Callbacks(sails);
             sails.on("hook:orm:loaded", () => {
-                const schema = getGraphQLSchema(sails, this.callbacks);
-                this.controller = Controller({ schema: schema });
-                graphql(schema, introspectionQuery).then((jsonSchema) => {
+                const info = getGraphQLSchemaAndResolver(sails, this.callbacks);
+                this.controller = Controller({ schema: info.schema, resolver: info.resolver });
+                graphql(info.schema, introspectionQuery).then((jsonSchema) => {
                     this.jsonSchema = jsonSchema;
                     cb();
                 }).catch((err) => {

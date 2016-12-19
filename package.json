@@ -1,6 +1,6 @@
 {
   "name": "sails-hook-graphql",
-  "version": "0.2.19",
+  "version": "0.2.21",
   "description": "Hook for Sails, which add graphql interface",
   "main": "index.js",
   "scripts": {
@@ -42,7 +42,7 @@
     "unmockedModulePathPatterns": []
   },
   "dependencies": {
-    "sails-graphql-adapter": "^0.2.19",
+    "sails-graphql-adapter": "^0.2.22",
     "sails-typings": "^0.2.3"
   }
 }
