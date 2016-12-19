@@ -42,7 +42,7 @@
     "unmockedModulePathPatterns": []
   },
   "dependencies": {
-    "sails-graphql-adapter": "^0.2.16",
+    "sails-graphql-adapter": "^0.2.17",
     "sails-typings": "^0.2.3"
   }
 }
