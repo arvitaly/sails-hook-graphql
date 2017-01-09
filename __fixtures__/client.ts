@@ -4,7 +4,7 @@ import SailsIOJS = require("sails.io.js");
 import SocketIO = require("socket.io-client");
 const io = SailsIOJS(SocketIO);
 io.sails.url = process.argv[2];
-process.on("message", async (message) => {
+process.on("message", async(message) => {
     let subscriptionId = null;
     switch (message.type) {
         case "subscription":
@@ -41,7 +41,7 @@ function query(query, subscriptionId) {
                     ", error " + + JSON.stringify("" + jwres.error));
                 return;
             }
-            let realData: ExecutionResult = JSON.parse(data as any);
+            const realData: ExecutionResult = JSON.parse(data as any);
             if (realData.errors) {
                 reject("GraphQL errors: " + JSON.stringify(realData.errors));
                 return;

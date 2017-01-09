@@ -48,7 +48,7 @@ function query(query, subscriptionId) {
                     ", error " + +JSON.stringify("" + jwres.error));
                 return;
             }
-            let realData = JSON.parse(data);
+            const realData = JSON.parse(data);
             if (realData.errors) {
                 reject("GraphQL errors: " + JSON.stringify(realData.errors));
                 return;

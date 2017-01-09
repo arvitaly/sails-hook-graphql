@@ -24,6 +24,7 @@ describe("functional tests", () => {
     afterEach(() => __awaiter(this, void 0, void 0, function* () {
         client.close();
         app.kill();
+        yield new Promise((resolve) => { setTimeout(resolve, 500); });
     }));
     it("query one", () => __awaiter(this, void 0, void 0, function* () {
         const created = yield app.create("modelname1", sails_fixture_app_1.createModel1());

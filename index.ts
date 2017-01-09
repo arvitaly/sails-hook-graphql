@@ -7,9 +7,9 @@ export = (sails: Sails.App) => {
     return {
         callbacks: null,
         configKey: "graphql",
-        configure: function () {
+        configure: function() {
             const config: IConfig = sails.config[this.configKey] || {};
-            let url: string = config.url || "/graphql";
+            const url: string = config.url || "/graphql";
             config.isJSONSchema = typeof (config.isJSONSchema) === "undefined" ? true : config.isJSONSchema;
             if (config.isJSONSchema === true) {
                 config.jsonSchemaURL = config.jsonSchemaURL || "/graphql.schema.json";
@@ -32,7 +32,7 @@ export = (sails: Sails.App) => {
 
         },
         controller: null,
-        initialize: function (cb) {
+        initialize: function(cb) {
             this.callbacks = new Callbacks(sails);
             sails.on("hook:orm:loaded", () => {
                 const info = getGraphQLSchemaAndResolver(sails, this.callbacks);

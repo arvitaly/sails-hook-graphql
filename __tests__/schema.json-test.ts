@@ -2,14 +2,14 @@ import { get } from "http";
 import { createModel1, lift, model1Id, RemoteApp } from "sails-fixture-app";
 describe("Schema JSON", () => {
     let app: RemoteApp;
-    beforeEach(async () => {
+    beforeEach(async() => {
         app = await lift({
             modules: {
                 "sails-hook-graphql": require.resolve("./../"),
             },
         });
     });
-    afterEach(async () => {
+    afterEach(async() => {
         app.kill();
     });
     it("generate", (done) => {
