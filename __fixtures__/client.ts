@@ -4,7 +4,7 @@ import SailsIOJS = require("sails.io.js");
 import SocketIO = require("socket.io-client");
 const io = SailsIOJS(SocketIO);
 io.sails.url = process.argv[2];
-process.on("message", async(message) => {
+process.on("message", async (message) => {
     let subscriptionId = null;
     switch (message.type) {
         case "subscription":

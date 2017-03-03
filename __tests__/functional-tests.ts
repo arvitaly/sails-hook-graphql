@@ -5,7 +5,7 @@ import Client from "./../__fixtures__/SocketClient";
 describe("functional tests", () => {
     let app: RemoteApp;
     let client: Client;
-    beforeEach(async() => {
+    beforeEach(async () => {
         app = await lift({
             modules: {
                 "sails-hook-graphql": require.resolve("./../"),
@@ -13,12 +13,12 @@ describe("functional tests", () => {
         });
         client = new Client("http://127.0.0.1:14001");
     });
-    afterEach(async() => {
+    afterEach(async () => {
         client.close();
         app.kill();
         await new Promise((resolve) => { setTimeout(resolve, 500); });
     });
-    it("query one", async() => {
+    it("query one", async () => {
         const created = await app.create("modelname1", createModel1());
         const result = await client.query(`query Q1{
             viewer{
@@ -34,7 +34,7 @@ describe("functional tests", () => {
         }`);
         expect(result).toEqual({ viewer: { modelName1: { name: created.name, model2Field: null } } });
     });
-    it("query one with subscribe", async(done) => {
+    it("query one with subscribe", async (done) => {
         const created = await app.create(model1Id, createModel1());
         const result = await client.subscription(`query Q1{
             viewer{
@@ -51,7 +51,7 @@ describe("functional tests", () => {
         expect(result).toEqual({ viewer: { modelName1: { name: created.name } } });
         await app.update(model1Id, created.id, { name: "test" });
     });
-    it("query connection", async() => {
+    it("query connection", async () => {
         await app.create(model1Id, createModel1());
         await app.create(model1Id, createModel1());
         const created = await app.create(model1Id, createModel1());
@@ -69,7 +69,7 @@ describe("functional tests", () => {
         }`);
         expect(result).toMatchSnapshot();
     });
-    it("query connection with subscription", async(done) => {
+    it("query connection with subscription", async (done) => {
         const created = await app.create(model1Id, createModel1());
         const result = await client.subscription(`query Q1{
             viewer{
@@ -90,7 +90,7 @@ describe("functional tests", () => {
             });
         await app.update(model1Id, created.id, { name: "test" });
     });
-    it("mutation create", async() => {
+    it("mutation create", async () => {
         const newName1 = "newName1";
         const num1 = 1122;
         const dt1 = "Wed, 10 Nov 2010 17:00:00 GMT";
@@ -157,7 +157,7 @@ describe("functional tests", () => {
             },
         });
     });
-    it("mutation update", async() => {
+    it("mutation update", async () => {
         const created = await app.create(model1Id, createModel1());
         const newName1 = "n1";
         const dt1 = "Sun, 10 Nov 2013 17:00:00 GMT";
