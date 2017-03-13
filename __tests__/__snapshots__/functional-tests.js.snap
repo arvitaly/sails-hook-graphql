@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`functional tests query connection 1`] = `
 Object {
   "viewer": Object {
