@@ -1,5 +1,7 @@
 # sails-hook-graphql
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/arvitaly/sails-hook-graphql.svg)](https://greenkeeper.io/)
+
 Hook for Sails, which add graphql interface
 
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
