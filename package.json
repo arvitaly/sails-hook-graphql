@@ -31,7 +31,7 @@
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "jest": "^19.0.2",
-    "sails-fixture-app": "0.0.26",
+    "sails-fixture-app": "0.0.27",
     "sails.io.js": "^1.1.4",
     "socket.io-client": "^1.7.1",
     "tslint": "^4.5.1",
