@@ -37,12 +37,8 @@
     "tslint": "^4.5.1",
     "typescript": "^2.2.1"
   },
-  "jest": {
-    "automock": false,
-    "unmockedModulePathPatterns": []
-  },
   "dependencies": {
-    "sails-graphql-adapter": "^0.2.38",
+    "sails-graphql-adapter": "^0.2.39",
     "sails-typings": "^0.2.3"
   }
 }
