@@ -72,7 +72,6 @@ describe("functional tests", () => {
                             name
                         }
                     }
-                    
                 }
             }
         }`);
@@ -88,7 +87,7 @@ describe("functional tests", () => {
                             name
                         }
                     }
-                    
+
                 }
             }
         }`, (data) => {
@@ -103,10 +102,10 @@ describe("functional tests", () => {
         const newName1 = "newName1";
         const num1 = 1122;
         const dt1 = "Wed, 10 Nov 2010 17:00:00 GMT";
-        const result = yield client.query(`mutation M1{            
+        const result = yield client.query(`mutation M1{
             createModelName1(input:{
-                name:"${newName1}", 
-                num:${num1}, 
+                name:"${newName1}",
+                num:${num1},
                 isActive:false,
                 firstActive:"${dt1}",
                 createModel2Field:{
@@ -128,16 +127,16 @@ describe("functional tests", () => {
                         id
                         key
                         name
-                    }       
+                    }
                     model3s{
                         edges{
-                            node{                                
+                            node{
                                 title
                             }
                         }
-                    }             
-                }                
-            }            
+                    }
+                }
+            }
         }`);
         expect(result).toEqual({
             createModelName1: {
@@ -171,10 +170,10 @@ describe("functional tests", () => {
         const newName1 = "n1";
         const dt1 = "Sun, 10 Nov 2013 17:00:00 GMT";
         const globalId = graphql_relay_1.toGlobalId("ModelName1", created.id);
-        const result = yield client.query(`mutation M1{            
+        const result = yield client.query(`mutation M1{
             updateModelName1(input:{
                 id: "${globalId}",
-                setName:{name:"${newName1}"}, 
+                setName:{name:"${newName1}"},
                 setFirstActive:{firstActive:"${dt1}"},
                 createModel2Field:{
                     name: "name12",
@@ -189,9 +188,9 @@ describe("functional tests", () => {
                         id
                         key
                         name
-                    }                    
-                }                
-            }            
+                    }
+                }
+            }
         }`);
         expect(result).toEqual({
             updateModelName1: {
