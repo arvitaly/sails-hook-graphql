@@ -1,6 +1,6 @@
 {
   "name": "sails-hook-graphql",
-  "version": "0.2.42",
+  "version": "0.2.43",
   "description": "Hook for Sails, which add graphql interface",
   "main": "index.js",
   "scripts": {
