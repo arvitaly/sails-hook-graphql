@@ -3674,9 +3674,9 @@ sails-graphql-adapter@^0.2.48:
     sails-graphql-interfaces "^0.0.4"
     sails-typings "^0.2.2"
 
-sails-graphql-adapter@^0.2.50:
-  version "0.2.50"
-  resolved "https://registry.yarnpkg.com/sails-graphql-adapter/-/sails-graphql-adapter-0.2.50.tgz#842847743c2201b3194b882f63085ee4ca10d766"
+sails-graphql-adapter@^0.2.51:
+  version "0.2.51"
+  resolved "https://registry.yarnpkg.com/sails-graphql-adapter/-/sails-graphql-adapter-0.2.51.tgz#b661ecb2349bbdf843e9c24d612b9ee69fc6b8c3"
   dependencies:
     "@types/express-graphql" "0.0.33"
     express-graphql "^0.6.1"
