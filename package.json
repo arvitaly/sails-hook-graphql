@@ -38,7 +38,7 @@
     "typescript": "^2.2.2"
   },
   "dependencies": {
-    "sails-graphql-adapter": "^0.2.50",
+    "sails-graphql-adapter": "^0.2.51",
     "sails-typings": "^0.2.3"
   }
 }
