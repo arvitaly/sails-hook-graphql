@@ -3664,9 +3664,19 @@ sails-generate@~0.13.0:
     sails-generate-views "~0.10.5"
     sails-generate-views-jade "~0.10.3"
 
-sails-graphql-adapter@^0.2.48, sails-graphql-adapter@^0.2.49:
+sails-graphql-adapter@^0.2.48:
   version "0.2.49"
   resolved "https://registry.yarnpkg.com/sails-graphql-adapter/-/sails-graphql-adapter-0.2.49.tgz#5d2ccbf00c443e0239a17f63c5a26099010f3fcb"
+  dependencies:
+    "@types/express-graphql" "0.0.33"
+    express-graphql "^0.6.1"
+    graphql-models "^0.5.0"
+    sails-graphql-interfaces "^0.0.4"
+    sails-typings "^0.2.2"
+
+sails-graphql-adapter@^0.2.50:
+  version "0.2.50"
+  resolved "https://registry.yarnpkg.com/sails-graphql-adapter/-/sails-graphql-adapter-0.2.50.tgz#842847743c2201b3194b882f63085ee4ca10d766"
   dependencies:
     "@types/express-graphql" "0.0.33"
     express-graphql "^0.6.1"
