@@ -1702,6 +1702,16 @@ graphql-models@^0.5.0:
     graphql-fields-info "^0.0.15"
     graphql-relay "^0.5.1"
 
+graphql-models@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/graphql-models/-/graphql-models-0.5.1.tgz#1d53fd646d3725243e5c42678aa08daf899f69a7"
+  dependencies:
+    "@types/graphql" "^0.9.0"
+    "@types/graphql-relay" "^0.4.1"
+    graphql "^0.9.2"
+    graphql-fields-info "^0.0.15"
+    graphql-relay "^0.5.1"
+
 graphql-relay@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/graphql-relay/-/graphql-relay-0.5.1.tgz#3b3e44430a24c0f636e713f43f65bd542fe02ac9"
@@ -3674,13 +3684,13 @@ sails-graphql-adapter@^0.2.48:
     sails-graphql-interfaces "^0.0.4"
     sails-typings "^0.2.2"
 
-sails-graphql-adapter@^0.2.51:
-  version "0.2.51"
-  resolved "https://registry.yarnpkg.com/sails-graphql-adapter/-/sails-graphql-adapter-0.2.51.tgz#b661ecb2349bbdf843e9c24d612b9ee69fc6b8c3"
+sails-graphql-adapter@^0.2.52:
+  version "0.2.52"
+  resolved "https://registry.yarnpkg.com/sails-graphql-adapter/-/sails-graphql-adapter-0.2.52.tgz#7404ac80a363ce6882d9ddd43b467f7065e81e4d"
   dependencies:
     "@types/express-graphql" "0.0.33"
     express-graphql "^0.6.1"
-    graphql-models "^0.5.0"
+    graphql-models "^0.5.1"
     sails-graphql-interfaces "^0.0.4"
     sails-typings "^0.2.2"
 
